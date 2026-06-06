@@ -1,0 +1,18 @@
+@TmsApi_HostAddress = http://localhost:5117
+
+### Test Assessments Results (requires auth)
+
+
+###
+
+### Test Weather Forecast
+GET {{TmsApi_HostAddress}}/weatherforecast
+Accept: application/json
+
+
+/// Note: The following endpoint requires authentication. Ensure to include the appropriate Authorization header when testing.
+
+
+GET {{TmsApi_HostAddress}}/api/assessments/results
+Authorization: Bearer valid-token
+Accept: application/json
