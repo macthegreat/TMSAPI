@@ -2,17 +2,19 @@
 
 ### Test Assessments Results (requires auth)
 
-
+GET {{TmsApi_HostAddress}}/api/assessments/results
+Authorization: Bearer valid-token
+Accept: application/json
 ###
 
 ### Test Weather Forecast
 GET {{TmsApi_HostAddress}}/weatherforecast
 Accept: application/json
 
+### Test Enrollments
+
+
 
 /// Note: The following endpoint requires authentication. Ensure to include the appropriate Authorization header when testing.
 
 
-GET {{TmsApi_HostAddress}}/api/assessments/results
-Authorization: Bearer valid-token
-Accept: application/json
