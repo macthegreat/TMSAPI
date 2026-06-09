@@ -25,7 +25,7 @@ public class EnrollmentService : IEnrollmentService
         var record = new EnrollmentRecord(id, StudentId, CourseCode, DateTime.UtcNow);
         _store[id] = record;
 
-        
+
 
         // Check if the student is already enrolled in the course
         var existing = _store.Values.FirstOrDefault(e => e.StudentId == StudentId && e.CourseCode == CourseCode);
@@ -68,10 +68,31 @@ StudentId, CourseCode, existing.Id);
         return Task.FromResult(removed);
     }
 
-     public Task<IReadOnlyList<EnrollmentRecord>> GetAllAsync()
+    public Task<IReadOnlyList<EnrollmentRecord>> GetAllAsync()
     {
         IReadOnlyList<EnrollmentRecord> records = _store.Values.ToList().AsReadOnly();
         return Task.FromResult(records);
+    }
+
+
+    public Task<EnrollmentRecord> EnrollAsync(string StudentId, string courseCode)
+    {
+        var Existing = _store.Values.FirstOrDefault(e => e.StudentId == StudentId && e.CourseCode == courseCode);
+        if (Existing is not null)
+        {
+            _logger.LogWarning("Duplicate enrollment attempt {StudentId} already in {CourseCode} (record {EnrollmentId})", StudentId, courseCode, Existing.Id);
+            return Task.FromResult(Existing);
+
+        }
+
+        var id = Guid.NewGuid().ToString("N")[..8];
+        var record = new EnrollmentRecord(id, StudentId, courseCode, DateTime.UtcNow);
+        _store[id] = record;
+        _logger.LogInformation("Enrolled {StudentId} in {CourseCode} record {EnrollmentId}", StudentId, courseCode, id);
+        return Task.FromResult(record);
+
+
+
     }
 
 
@@ -84,16 +105,16 @@ StudentId, CourseCode, existing.Id);
 
 
     // The GetByIdAsync method retrieves an enrollment record by its ID. It checks if the record exists in the store and returns it, or null if not found.
-   
+
 
 
     // The GetAllAsync method returns a read-only list of all enrollment records currently stored in the service.
-//     public Task<bool> DeleteAsync(string id)
-//     {
-//         var removed = _store.Remove(id);
-//         return Task.FromResult(removed);
-//     }
-// }
+    //     public Task<bool> DeleteAsync(string id)
+    //     {
+    //         var removed = _store.Remove(id);
+    //         return Task.FromResult(removed);
+    //     }
+    // }
 
 
 

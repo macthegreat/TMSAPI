@@ -3,13 +3,15 @@ using Microsoft.AspNetCore.Authentication;
 var builder = WebApplication.CreateBuilder(args);
 
 
+
 // Add services to the container.
 
 builder.Services.AddControllers();
 
 
-builder.Services.AddAuthentication("Training").AddScheme<AuthenticationSchemeOptions,TrainingAuthHandler>("Training", null);
+builder.Services.AddAuthentication("Training").AddScheme<AuthenticationSchemeOptions, TrainingAuthHandler>("Training", null);
 builder.Services.AddAuthorization();
+builder.Services.AddOptions<paymentOptions>().BindConfiguration("Payment").ValidateDataAnnotations().ValidateOnStart();
 
 //
 builder.Services.AddSingleton<EnrollmentWorker>();
@@ -17,8 +19,9 @@ builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
 
 builder.Host.UseDefaultServiceProvider(options =>
 {
-options.ValidateScopes = true;
-options.ValidateOnBuild = true; });
+    options.ValidateScopes = true;
+    options.ValidateOnBuild = true;
+});
 
 var app = builder.Build();
 
@@ -36,10 +39,10 @@ app.MapGet("/api/assessments/results", () => Results.Ok(new
 })).RequireAuthorization();
 
 // This endpoint is for testing the EnrollmentWorker background service. It triggers the ProcessBatch method to process a batch of enrollments.
-app.MapGet("/api/enrollments/worker-smoke", (EnrollmentWorker worker) =>
+app.MapGet("/api/enrollments/worker-smoke",  (EnrollmentWorker worker) =>
 {
-worker.ProcessBatch();
-return Results.Ok("processed"); });
-
+      worker.ProcessBatch();
+    return Results.Ok("processed");
+});
 
 app.Run();
