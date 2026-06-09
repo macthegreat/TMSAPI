@@ -95,6 +95,8 @@ StudentId, CourseCode, existing.Id);
 
     }
 
+    
+
 
     // The EnrollmentService class implements the IEnrollmentService interface and provides methods to manage course enrollments for students. It uses an in-memory dictionary to store enrollment records and includes logging for key operations.
     // public Task<EnrollmentRecord?> GetByIdAsync(string ID)

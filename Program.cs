@@ -39,9 +39,9 @@ app.MapGet("/api/assessments/results", () => Results.Ok(new
 })).RequireAuthorization();
 
 // This endpoint is for testing the EnrollmentWorker background service. It triggers the ProcessBatch method to process a batch of enrollments.
-app.MapGet("/api/enrollments/worker-smoke",  (EnrollmentWorker worker) =>
+app.MapGet("/api/enrollments/worker-smoke",  async(EnrollmentWorker worker) =>
 {
-      worker.ProcessBatch();
+      await worker.ProcessBatch();
     return Results.Ok("processed");
 });
 

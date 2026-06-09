@@ -1,15 +1,18 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 public class EnrollmentWorker(IServiceScopeFactory scopeFactory)
 {
-    public void ProcessBatch()
+    public async Task ProcessBatch()
     {
-        var Scope=scopeFactory.CreateScope();
-
-        var svc=Scope.ServiceProvider.GetRequiredService<IEnrollmentService>();
-
-
+        using var scope = scopeFactory.CreateScope();
+        {
+            var svc = scope.ServiceProvider.GetRequiredService<IEnrollmentService>();
+            // Use the service, then let the 'using' block dispose the scope
+            // and its scoped services automatically.
+        }
     }
 }
 
