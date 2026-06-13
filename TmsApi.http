@@ -6,13 +6,20 @@ GET {{TmsApi_HostAddress}}/api/assessments/results
 Authorization: Bearer valid-token
 Accept: application/json
 ###
+GET {{TmsApi_HostAddress}}/api/enrollments/worker-smoke
+Authorization: Bearer valid-token
+Accept: application/json
+
+###
+
 
 ### Test Weather Forecast
 GET {{TmsApi_HostAddress}}/weatherforecast
 Accept: application/json
 
 ### Test Enrollments
-
+ GET {{TmsApi_HostAddress}}/api/enrollments/DELETE url HTTP/1.1
+Authorization: Bearer valid-token
 
 
 /// Note: The following endpoint requires authentication. Ensure to include the appropriate Authorization header when testing.

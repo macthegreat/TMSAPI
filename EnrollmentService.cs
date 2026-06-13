@@ -94,10 +94,17 @@ StudentId, CourseCode, existing.Id);
 
 
     }
+    
+    }
 
+    public class TmsDatabaseException(string message) : Exception(message)
+    {
+        
+    }
     
 
 
+    //Olddddd code
     // The EnrollmentService class implements the IEnrollmentService interface and provides methods to manage course enrollments for students. It uses an in-memory dictionary to store enrollment records and includes logging for key operations.
     // public Task<EnrollmentRecord?> GetByIdAsync(string ID)
     // {
@@ -121,8 +128,7 @@ StudentId, CourseCode, existing.Id);
 
 
 
-}
-//
+
 public record EnrollmentRecord(string Id, string StudentId, string CourseCode, DateTime EnrolledAt);
 
 
