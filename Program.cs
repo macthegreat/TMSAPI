@@ -1,8 +1,10 @@
 
+
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.OpenApi;
 using Scalar.AspNetCore;
 var builder = WebApplication.CreateBuilder(args);
+
 
 
 
@@ -33,18 +35,23 @@ var app = builder.Build();
 if(app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.MapScalarApiReference();
-   
 }
 
 // Configure the HTTP request pipeline.
 //Register routing in the pipeline where it belongs for your app.
+app.UseExceptionHandler();
+app.UseStatusCodePages();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseExceptionHandler();
-app.UseStatusCodePages();
+
+
 app.MapControllers();
+
+if(app.Environment.IsDevelopment())
+{
+    app.MapScalarApiReference();
+}
 
 
 
@@ -67,6 +74,9 @@ app.MapGet("/api/error", () =>
 {
     throw new TmsDatabaseException("Simulated database failure for ProblemDetails testing");
 });
+
+
+
 
 
 app.Run();

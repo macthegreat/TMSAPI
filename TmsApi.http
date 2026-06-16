@@ -13,15 +13,46 @@ Accept: application/json
 ###
 
 
+
+
 ### Test Weather Forecast
 GET {{TmsApi_HostAddress}}/weatherforecast
 Accept: application/json
 
-### Test Enrollments
- GET {{TmsApi_HostAddress}}/api/enrollments/DELETE url HTTP/1.1
+### Get All Enrollments
+GET {{TmsApi_HostAddress}}/api/enrollment
+Authorization: Bearer valid-token
+Accept: application/json
+
+###
+
+### Create New Enrollment
+POST {{TmsApi_HostAddress}}/api/enrollment
+Authorization: Bearer valid-token
+Content-Type: application/json
+
+{
+  "studentId": "S-001",
+  "courseCode": "CS-101"
+}
+
+###
+
+### Get Enrollment by ID
+GET {{TmsApi_HostAddress}}/api/enrollment/REPLACE_WITH_ID
+Authorization: Bearer valid-token
+Accept: application/json
+
+###
+
+### Delete Enrollment
+DELETE {{TmsApi_HostAddress}}/api/enrollment?id=REPLACE_WITH_ID
 Authorization: Bearer valid-token
 
-
-/// Note: The following endpoint requires authentication. Ensure to include the appropriate Authorization header when testing.
+///
+/// Note: 
+/// 1. Replace REPLACE_WITH_ID with an actual enrollment ID from the Get All Enrollments response
+/// 2. Click "Send Request" on any block to test that endpoint
+/// 3. View responses in the panel on the right
 
 

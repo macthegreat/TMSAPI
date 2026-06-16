@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 
-[Controller]
+
+
+
+
+[ApiController]
 [Route("api/enrollment")]
 
 public class EnrollmentController(IEnrollmentService enrollmentService) : ControllerBase
@@ -19,15 +23,15 @@ public class EnrollmentController(IEnrollmentService enrollmentService) : Contro
         var record = await enrollmentService.GetByIdAsync(id);
         return record is not null ? Ok(record) : NotFound();
     }
-
+    
     [HttpPost]
-    public async Task<IActionResult> create([FromBody] CreateEnrollmentRequest request)
+    public async Task<IActionResult> Create([FromBody] CreateEnrollmentRequest request)
     {
         var record = await enrollmentService.EnrollUserInCourseAsync(request.StudentId, request.CourseCode);
         return CreatedAtAction(nameof(GetById), new { id = record.Id }, record);
 
-    }
-    [HttpDelete]
+    }   
+    [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(string id)
     {
         var deleted = await enrollmentService.DeleteAsync(id);

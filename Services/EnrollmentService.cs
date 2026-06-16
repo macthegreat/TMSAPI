@@ -94,41 +94,35 @@ StudentId, CourseCode, existing.Id);
 
 
     }
-    
-    }
 
-    public class TmsDatabaseException(string message) : Exception(message)
-    {
-        
-    }
-    
+}
 
+public class TmsDatabaseException(string message) : Exception(message)
+{
 
-    //Olddddd code
-    // The EnrollmentService class implements the IEnrollmentService interface and provides methods to manage course enrollments for students. It uses an in-memory dictionary to store enrollment records and includes logging for key operations.
-    // public Task<EnrollmentRecord?> GetByIdAsync(string ID)
-    // {
-    //     var record = _store.TryGetValue(ID, out var value) ? value : null;
-    //     return Task.FromResult(record);
-    // }
-
-
-    // The GetByIdAsync method retrieves an enrollment record by its ID. It checks if the record exists in the store and returns it, or null if not found.
+}
 
 
 
-    // The GetAllAsync method returns a read-only list of all enrollment records currently stored in the service.
-    //     public Task<bool> DeleteAsync(string id)
-    //     {
-    //         var removed = _store.Remove(id);
-    //         return Task.FromResult(removed);
-    //     }
-    // }
+//Olddddd code
+// The EnrollmentService class implements the IEnrollmentService interface and provides methods to manage course enrollments for students. It uses an in-memory dictionary to store enrollment records and includes logging for key operations.
+// public Task<EnrollmentRecord?> GetByIdAsync(string ID)
+// {
+//     var record = _store.TryGetValue(ID, out var value) ? value : null;
+//     return Task.FromResult(record);
+// }
+
+
+// The GetByIdAsync method retrieves an enrollment record by its ID. It checks if the record exists in the store and returns it, or null if not found.
 
 
 
-
-
-public record EnrollmentRecord(string Id, string StudentId, string CourseCode, DateTime EnrolledAt);
+// The GetAllAsync method returns a read-only list of all enrollment records currently stored in the service.
+//     public Task<bool> DeleteAsync(string id)
+//     {
+//         var removed = _store.Remove(id);
+//         return Task.FromResult(removed);
+//     }
+// }
 
 
