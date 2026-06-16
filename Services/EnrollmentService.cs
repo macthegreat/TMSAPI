@@ -1,13 +1,6 @@
 
-public interface IEnrollmentService
-{
-    Task<EnrollmentRecord> EnrollUserInCourseAsync(string StudentId, string CourseCode);
-    Task<EnrollmentRecord?> GetByIdAsync(string ID);
-    Task<IReadOnlyList<EnrollmentRecord>> GetAllAsync();
-    Task<bool> DeleteAsync(string id);
-}
-// The EnrollmentService class implements the IEnrollmentService interface and provides methods to manage course enrollments for students.
 
+// The EnrollmentService class implements the IEnrollmentService interface and provides methods to manage course enrollments for students.
 public class EnrollmentService : IEnrollmentService
 {
     private readonly Dictionary<string, EnrollmentRecord> _store = new();
@@ -82,7 +75,7 @@ StudentId, CourseCode, existing.Id);
         {
             _logger.LogWarning("Duplicate enrollment attempt {StudentId} already in {CourseCode} (record {EnrollmentId})", StudentId, courseCode, Existing.Id);
             return Task.FromResult(Existing);
-
+            
         }
 
         var id = Guid.NewGuid().ToString("N")[..8];
@@ -90,9 +83,6 @@ StudentId, CourseCode, existing.Id);
         _store[id] = record;
         _logger.LogInformation("Enrolled {StudentId} in {CourseCode} record {EnrollmentId}", StudentId, courseCode, id);
         return Task.FromResult(record);
-
-
-
     }
 
 }

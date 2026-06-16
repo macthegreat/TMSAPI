@@ -15,7 +15,7 @@ public class EnrollmentController(IEnrollmentService enrollmentService) : Contro
         var enrollment = await enrollmentService.GetAllAsync();
         return Ok(enrollment);
 
-    }
+    } 
     [HttpGet("{id}")]
 
     public async Task<IActionResult> GetById(string id)

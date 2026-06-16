@@ -20,6 +20,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddOptions<paymentOptions>().BindConfiguration("Payment").ValidateDataAnnotations().ValidateOnStart();
 
 //
+builder.Services.AddScoped<IStudentService,StudentService>();
 builder.Services.AddSingleton<EnrollmentWorker>();
 builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
 
