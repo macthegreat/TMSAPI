@@ -84,7 +84,7 @@ app.MapGet("/api/error", () =>
 
 
 
-//
+/*
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<TmsDbContext>();
@@ -125,6 +125,6 @@ using (var scope = app.Services.CreateScope())
         context.SaveChanges();
      }
 }
-
+*/
 app.Run();
 

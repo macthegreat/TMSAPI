@@ -4,9 +4,9 @@ public class Enrollment
 {
     public int Id { get; set; }
 
-    public string StudentId { get; set; } =null!;
+    public int StudentId { get; set; } 
 
-    public string CourseId { get; set; } = null!;
+    public int CourseId { get; set; } 
 
     public DateTime EnrolledAt { get; set; } = DateTime.UtcNow;
 
