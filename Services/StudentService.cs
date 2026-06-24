@@ -26,8 +26,8 @@ public class StudentService : IStudentService
 
         if (student is null)
             return Task.FromResult(false);
-
-        _students.Remove(student);
+            
+             _students.Remove(student);
 
         return Task.FromResult(true);
     }

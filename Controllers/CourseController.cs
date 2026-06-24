@@ -1,43 +1,35 @@
 using Microsoft.AspNetCore.Mvc;
 
+[ApiController]
+[Route("api/courses")]
 
 public class CourseController(ICourseService courseService) : ControllerBase
 {
-    // Get all courses
-    [HttpGet("api/course")]
+    [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var courses = await courseService.GetAllCoursesAsync();
+        var courses = await courseService.GetAllAsync();
         return Ok(courses);
     }
 
-// Get course by code
-    [HttpGet("api/course/{code}")]
+    [HttpGet("{code}")]
     public async Task<IActionResult> GetByCode(string code)
     {
-        var course = await courseService.GetCourseByCodeAsync(code);
+        var course = await courseService.GetByCodeAsync(code);
         return course is not null ? Ok(course) : NotFound();
     }
 
-    [HttpPost("api/course")]
-    public async Task<IActionResult> Create([FromBody] Course course)
+    [HttpPost]
+    public async Task<IActionResult> Create(Course course)
     {
-        // Implementation for creating a new course
-        return CreatedAtAction(nameof(GetByCode), new { code = course.Code }, course);
+        var createdCourse = await courseService.CreateAsync(course);
+        return CreatedAtAction(nameof(GetByCode), new { code = createdCourse.Code }, createdCourse);
     }
 
-    [HttpDelete("api/course/{code}")]
+    [HttpDelete("{code}")]
     public async Task<IActionResult> Delete(string code)
     {
-       
-       var course = await courseService.GetCourseByCodeAsync(code);
-    if (course is null)
-        {
-            return NotFound(); 
-        }
-        return  NoContent();
-    
-    // Implementation for deleting a course
-    
+        var deleted = await courseService.DeleteAsync(code);
+        return deleted ? NoContent() : NotFound();
     }
 }
