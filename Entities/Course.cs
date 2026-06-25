@@ -9,6 +9,7 @@ public class Course
 
     // Navigation properties
     public ICollection<Assessment> Assessments { get; set; } = new List<Assessment>();
+    
     public ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
     
 }

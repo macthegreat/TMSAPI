@@ -21,7 +21,7 @@ public class StudentsController(
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(
-        string id)
+        int id)
     {
         logger.LogInformation(
             "Retrieving student {StudentId}",
@@ -51,7 +51,7 @@ public class StudentsController(
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(
-        string id)
+        int id)
     {
         logger.LogInformation(
             "Deleting student {StudentId}",

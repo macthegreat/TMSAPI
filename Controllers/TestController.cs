@@ -33,8 +33,11 @@ public class TestController(TmsDbContext context) : ControllerBase
     {
         Console.WriteLine("\n>>> STEP 1: Running non-translatable query..."); try
         {
-            var students = context.Students.Where(s => IsHonorRoll(s.GPA)) // EF Core does not kno w how to map this method to SQL
-            .ToList(); return Ok(students);
+            // var students = context.Students.Where(s => IsHonorRoll(s.GPA)) // EF Core does not kno w how to map this method to SQL
+            // .ToList(); return Ok(students);
+            var students = context.Students.Where(s => s.GPA >= 3.5m).ToList();
+
+        
         }
         catch (Exception ex)
         {
@@ -42,4 +45,18 @@ public class TestController(TmsDbContext context) : ControllerBase
             return BadRequest(new { Message = ex.Message });
         }
     }
+
 }
+
+
+
+/*
+    var count = await context.Students.Where(s => s.IsActive && s.GPA >= 3.0m) .CountAsync();
+
+
+    var list = await context.Courses .Select(c => new
+{
+c.Title,
+EnrollmentCount = c.Enrollments.Count 
+}).OrderByDescending(x => x.EnrollmentCount).ToListAsync();
+*/

@@ -7,7 +7,7 @@ public class StudentService : IStudentService
         return Task.FromResult(_students.AsEnumerable());
     }
 
-    public Task<Student?> GetByIdAsync(string id)
+    public Task<Student?> GetByIdAsync(int id)
     {
         return Task.FromResult(
             _students.FirstOrDefault(x => x.Id == id));
@@ -19,7 +19,7 @@ public class StudentService : IStudentService
         return Task.FromResult(student);
     }
 
-    public Task<bool> DeleteAsync(string id)
+    public Task<bool> DeleteAsync(int id)
     {
         var student =
             _students.FirstOrDefault(x => x.Id == id);

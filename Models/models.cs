@@ -8,7 +8,7 @@ public record EnrollmentRecord(
 //add course class
 public class Course
 {
-    public string Id { get; init; } = null!;
+    public int Id { get; init; }
     public required string Code { get; init; }
 
     public required string Title
@@ -40,7 +40,7 @@ public class Course
 // add student class
 public class Student
 {
-    public string Id { get; init; } = null!;
+    public int Id { get; init; } 
 
     public string RegistrationNumber { get; set; } = null!;
 
@@ -125,7 +125,6 @@ public class LabAssignment : IGradable
              + (CodeQualityScore * 0.3m);
     }
 
- 
 }
 
 //
